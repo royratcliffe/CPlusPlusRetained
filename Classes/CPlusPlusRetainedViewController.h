@@ -32,4 +32,6 @@
 
 @property(nonatomic, retain) IBOutlet UITextView *textView;
 
+- (void)log:(NSString *)format, ...;
+
 @end
