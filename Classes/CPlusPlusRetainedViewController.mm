@@ -27,6 +27,8 @@
 
 @implementation CPlusPlusRetainedViewController
 
+@synthesize textView;
+
 // designated initialiser
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
