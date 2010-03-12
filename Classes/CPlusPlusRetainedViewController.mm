@@ -29,49 +29,27 @@
 
 @synthesize textView;
 
-// designated initialiser
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)log:(NSString *)format, ...
 {
-	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
+	va_list args;
+	va_start(args, format);
+	NSString *formattedString = [[NSString alloc] initWithFormat:format arguments:args];
+	va_end(args);
+	NSString *text = textView.text;
+	if ([text length])
 	{
-		// Custom initialisation. Override here to perform set-up that executes
-		// before the view loads.
+		text = [text stringByAppendingString:@"\n"];
 	}
-	return self;
+	textView.text = [text stringByAppendingString:formattedString];
+	[formattedString release];
 }
 
 - (void)viewDidLoad
 {
-	// Called after the view has been loaded. For view controllers created in
-	// code, this is after -loadView. For view controllers unarchived from a
-	// nib, this is after the view is set.
 	[super viewDidLoad];
-}
-
-// (starting with iPhone OS 3.0)
-- (void)viewDidUnload
-{
-	// Called after the view controller's view is released and set to nil. For
-	// example, a memory warning which causes the view to be purged. Not invoked
-	// as a result of -dealloc.
-}
-
-- (void)didReceiveMemoryWarning
-{
-	// Called when the parent application receives a memory warning. Default
-	// implementation releases the view if it doesn't have a superview.
-	[super didReceiveMemoryWarning];
-}
-
-//------------------------------------------------------------------------------
-#pragma mark                                         UI View Controller Rotation
-//------------------------------------------------------------------------------
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	// Override to allow rotation. Default returns YES only for
-	// UIDeviceOrientationPortrait.
-	return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+	
+	textView.text = @"";
+	[self log:@"Testing %d-%d-%d", 1, 2, 3];
 }
 
 @end
