@@ -27,7 +27,9 @@
 
 @interface CPlusPlusRetainedViewController : UIViewController
 {
-	
+	UITextView *textView;
 }
+
+@property(nonatomic, retain) IBOutlet UITextView *textView;
 
 @end
